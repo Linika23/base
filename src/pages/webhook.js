@@ -1,8 +1,9 @@
 // src/pages/api/webhook.js
+// /src/pages/api/webhook.js
 export default function handler(req, res) {
   if (req.method === 'POST') {
-    const intent = req.body.queryResult?.intent?.displayName;
-    const parameters = req.body.queryResult?.parameters || {};
+    const intent = req.body.queryResult.intent.displayName;
+    const parameters = req.body.queryResult.parameters;
 
     let responseText = '';
 
@@ -19,11 +20,8 @@ export default function handler(req, res) {
       }
     }
 
-    return res.status(200).json({
-      fulfillmentText: responseText
-    });
+    res.status(200).json({ fulfillmentText: responseText });
   } else {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+    res.status(405).send('Method Not Allowed');
   }
 }
