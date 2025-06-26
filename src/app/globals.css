@@ -1,0 +1,194 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Removed explicit font-family: Arial... from body */
+
+@layer base {
+  :root {
+    --background: 101 14% 35%; /* #697649 */
+    --foreground: 0 0% 98%; /* Almost white for contrast */
+    --card: 101 14% 30%; /* Slightly darker than background */
+    --card-foreground: 0 0% 98%;
+    --popover: 101 14% 30%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 79 60% 61%; /* #B1DB5E - Updated primary color */
+    --primary-foreground: 0 0% 10%; /* Dark text for better contrast on new primary */
+    --secondary: 200 100% 95%; /* Soft blue #E6F7FF - User messages background */
+    --secondary-foreground: 210 40% 9.8%; /* Dark text for soft blue */
+    --muted: 101 14% 40%; /* Slightly lighter muted tone */
+    --muted-foreground: 0 0% 63.9%; /* Light gray text */
+    --accent: 79 60% 55%; /* Slightly darker green for hover/active states based on new primary */
+    --accent-foreground: 0 0% 10%; /* Dark text on accent green */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 101 14% 45%; /* Slightly lighter border */
+    --input: 101 14% 45%;
+    --ring: 79 60% 65%; /* Lighter green ring based on new primary */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* Custom Variables for Chat Bubbles */
+    --ai-bubble-background: 60 100% 12%; /* #393803 - AI text bubble */
+    --ai-bubble-foreground: 38 100% 98%; /* #FFF5E9 - AI text color */
+    --user-bubble-background: 34 100% 95%; /* #fff5e9 - User text bubble */
+    /* Updated user bubble foreground to match #223100 */
+    --user-bubble-foreground: 79 100% 10%; /* #223100 - User text bubble foreground */
+
+    /* Timestamp color updated to #FDF3E7 (approx HSL) */
+    --time-foreground: 38 83% 95%; /* #FDF3E7 */
+
+    /* S.A.A.T.H.I title gradient variables */
+    --saathi-title-top: 79 43% 25%; /* #516628 */
+    --saathi-title-bottom: 79 60% 61%; /* #B1DB5E */
+
+
+    /* Sidebar variables (can keep defaults or adjust if sidebar is used) */
+    --sidebar-background: 101 14% 25%; /* Darker shade for sidebar */
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 180 100% 25%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 180 100% 30%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 101 14% 30%;
+    --sidebar-ring: 180 100% 35%;
+  }
+  .dark {
+    /* Define dark mode variables if needed, otherwise fallback to root */
+    --background: 101 14% 10%; /* Darker background for dark mode */
+    --foreground: 0 0% 98%;
+    --card: 101 14% 15%;
+    --card-foreground: 0 0% 98%;
+    --popover: 101 14% 15%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 79 60% 65%; /* Lighter Green for dark mode primary */
+    --primary-foreground: 0 0% 10%; /* Darker text on light green */
+    --secondary: 200 50% 20%; /* Darker Blue */
+    --secondary-foreground: 0 0% 98%;
+    --muted: 101 14% 20%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 79 60% 58%; /* Slightly darker green accent for dark mode */
+    --accent-foreground: 0 0% 10%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 101 14% 25%;
+    --input: 101 14% 25%;
+    --ring: 79 60% 70%; /* Lighter Green Ring for dark mode */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Custom Variables for Chat Bubbles - Dark Mode */
+    --ai-bubble-background: 180 100% 25%; /* Use primary Teal for AI bubble in dark mode */
+    --ai-bubble-foreground: 38 100% 98%; /* #FFF5E9 - AI text color */
+    --user-bubble-background: 101 14% 25%; /* Darker user bubble */
+    /* Updated user bubble foreground for dark mode to match #223100 logic */
+    --user-bubble-foreground: 79 100% 80%; /* Lighter shade of #223100 for dark mode */
+
+     /* Timestamp color - Dark Mode - Use the same light color */
+     --time-foreground: 38 83% 95%; /* #FDF3E7 */
+
+    /* S.A.A.T.H.I title gradient variables - Dark Mode */
+    --saathi-title-top: 79 43% 75%; /* Adjust dark mode top color if needed */
+    --saathi-title-bottom: 79 60% 65%; /* Adjust dark mode bottom color if needed */
+
+
+    /* Sidebar variables - Dark Mode */
+    --sidebar-background: 101 14% 5%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 180 100% 35%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 180 100% 40%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 101 14% 15%;
+    --sidebar-ring: 180 100% 45%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-transparent text-foreground font-sans; /* Ensure font-sans (Sora) is applied */
+  }
+}
+
+/* Floating animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0); } /* Top peak (at rest) */
+    50% { transform: translateY(5px); } /* Bottom peak (further down) */
+}
+
+@layer components {
+  /* Apply the user bubble foreground color via Tailwind */
+  .bg-user-bubble {
+    background-color: hsl(var(--user-bubble-background));
+  }
+  .text-user-foreground {
+    color: hsl(var(--user-bubble-foreground));
+  }
+
+  .bg-ai-bubble {
+    background-color: hsl(var(--ai-bubble-background));
+  }
+  .text-ai-foreground {
+    color: hsl(var(--ai-bubble-foreground));
+  }
+
+  .text-time-foreground {
+    color: hsl(var(--time-foreground));
+  }
+
+  /* Explicit text color utility class for the icon */
+  .text-icon-header {
+      color: hsl(var(--time-foreground)); /* Use the time foreground color */
+  }
+
+  /* Target the placeholder specifically */
+  .placeholder\:text-time-foreground::placeholder {
+    color: hsl(var(--time-foreground));
+    opacity: 1; /* Ensure placeholder is fully visible */
+  }
+
+  /* Utility class to apply the time-foreground color as a border */
+  .border-time-foreground {
+    border-color: hsl(var(--time-foreground));
+  }
+
+  /* Utility class for S.A.A.T.H.I title gradient */
+  .text-saathi-gradient {
+    /* Changed bottom color stop from 80% to 60% */
+    background: linear-gradient(to bottom, hsl(var(--saathi-title-top)) 8%, hsl(var(--saathi-title-bottom)) 60%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Glassmorphism effect */
+  .glassmorphic {
+    @apply bg-card/80 backdrop-blur-sm border border-white/10; /* Adjust alpha and blur as needed */
+  }
+
+   /* Apply floating animation */
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+}
+
+body {
+  background-image: url('background.webp');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
