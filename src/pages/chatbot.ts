@@ -92,3 +92,4 @@ Now answer this user question clearly:
     res.status(500).json({ text: "Sorry, I couldn't process your request." });
   }
 }
+// src/pages/api/chat.ts or app/api/chat/route.ts (based on Next.js routing)

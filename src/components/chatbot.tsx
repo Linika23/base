@@ -10,8 +10,7 @@ import { useState } from 'react';
 
 export default function Chatbot() {
   const [question, setQuestion] = useState('');
-  const [answer, setAnswer] = useState('');
-  const [loading, setLoading] = useState(false);
+  
 
   
 
@@ -31,6 +30,52 @@ export default function Chatbot() {
   recognition.start();
 };
 
+const handleSend = async (message: string) => {
+  setLoading(true);
+
+  try {
+    const res = await fetch("https://webhook-uafc.onrender.com", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        queryResult: {
+          intent: {
+            displayName: "wastetype", // or dynamic intent name
+          },
+          parameters: {
+            wastetype: message, // assuming user types "cow dung" etc.
+          },
+        },
+      }),
+    });
+
+    const data = await res.json();
+    setAnswer(data.fulfillmentText);
+  } catch (err) {
+    setAnswer("Something went wrong. Please try again.");
+  }
+
+  setLoading(false);
+};
+
+
+const [answer, setAnswer] = useState("");
+const [loading, setLoading] = useState(false);
+
+return (
+  <>
+    <input
+      type="text"
+      value={question}
+      onChange={(e) => setQuestion(e.target.value)}
+    />
+    <button onClick={() => handleSend(question)}>Send</button>
+
+    {loading ? <p>Loading...</p> : <p>{answer}</p>}
+  </>
+);
 
 
   const handleAsk = async () => {
